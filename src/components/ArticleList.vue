@@ -1,11 +1,11 @@
 <template lang="html">
-  <ul>
+  <div>
     <ArticleListItem v-for="(article, key) in articles"
                      :article="article"
                      :key="key"
                      >
                      </ArticleListItem>
-  </ul>
+  </div>
 </template>
 
 <script>

@@ -1,9 +1,12 @@
 <template lang="html">
-  <li>
+  <v-card>
+    <v-card-title>
     {{article.title}}
-    {{article.source.name}}
-  </li>
-
+  </v-card-title>
+  <v-card-text>
+    Source: {{article.source.name}}
+  </v-card-text>
+</v-card>
 </template>
 
 <script>
