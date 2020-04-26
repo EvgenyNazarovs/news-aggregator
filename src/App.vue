@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
-    <ArticleList :articles="articles"></ArticleList>
+    <ArticleList :articles="feedOne"></ArticleList>
+    <ArticleList :articles="feedTwo"></ArticleList>
   </div>
 
 
@@ -13,23 +14,33 @@ import ArticleListItem from './components/ArticleListItem';
 import {eventBus} from './main.js'
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     ArticleList
   },
   data(){
     return {
-      articles: []
+      feedOne: [],
+      feedTwo: [],
+      apiKey: 'b5eecd356735456598f2942ec30cc690'
     }
   },
   mounted(){
-    fetch('https://newsapi.org/v2/everything?q=bitcoin&pageSize=50&language=en&apiKey=b5eecd356735456598f2942ec30cc690')
-    .then(res => res.json())
-    .then(data => {
-      this.articles = data.articles
-      console.log(this.articles);
-    })
-  }
+    this.getArticlesFeedOne('bitcoin')
+    this.getArticlesFeedTwo('coronavirus')
+  },
+  methods: {
+    getArticlesFeedOne(subject){
+      fetch(`https://newsapi.org/v2/everything?q=${subject}&pageSize=25&excludeDomains=thenextweb.com&language=en&apiKey=${this.apiKey}`)
+        .then(res => res.json())
+        .then(data => this.feedOne = data.articles)
+      },
+      getArticlesFeedTwo(subject){
+        fetch(`https://newsapi.org/v2/everything?q=${subject}&pageSize=50&language=en&apiKey=${this.apiKey}`)
+          .then(res => res.json())
+          .then(data => this.feedTwo = data.articles)
+      }
+    }
 }
 </script>
 

@@ -1,9 +1,7 @@
 <template lang="html">
-  <li @mouseover="onArticleHighlight" @mouseleave="onLeave" @click="onArticleSelect">
-    <img :src="article.urlToImage" width="150px">{{article.title}}
-    <div v-show="selectedArticle">
-      {{article.description}}
-    </div>
+  <li>
+    {{article.title}}
+    {{article.source.name}}
   </li>
 
 </template>
